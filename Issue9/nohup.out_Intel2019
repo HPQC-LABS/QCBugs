@@ -1,0 +1,306 @@
+mkdir -p build && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/timer.cc -o build/timer.o
+mkdir -p build && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/injector.cc -o build/injector.o
+mkdir -p build/chem && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/chem/integrals.cc -o build/chem/integrals.o
+mkdir -p build/chem && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/chem/chem_system.cc -o build/chem/chem_system.o
+mkdir -p build/chem && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/chem/rdm.cc -o build/chem/rdm.o
+mkdir -p build/chem && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/chem/dooh_util.cc -o build/chem/dooh_util.o
+mkdir -p build/chem && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/chem/product_table.cc -o build/chem/product_table.o
+mkdir -p build && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/util.cc -o build/util.o
+mkdir -p build/heg && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/heg/heg_system.cc -o build/heg/heg_system.o
+mkdir -p build/heg && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/heg/k_points.cc -o build/heg/k_points.o
+mkdir -p build/heg && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/heg/k_point.cc -o build/heg/k_point.o
+mkdir -p build/solver && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/solver/davidson.cc -o build/solver/davidson.o
+mkdir -p build/solver && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/solver/sparse_matrix.cc -o build/solver/sparse_matrix.o
+mkdir -p build/det && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/det/half_det.cc -o build/det/half_det.o
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+icpc: command line warning #10006: ignoring unknown option '-Wno-unused-result'
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(13): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_CHAR;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(18): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_SHORT;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(23): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_INT;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(28): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_LONG;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(33): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_LONG_LONG_INT;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(38): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_UNSIGNED_CHAR;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(43): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_UNSIGNED_SHORT;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(48): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_UNSIGNED;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(53): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_UNSIGNED_LONG;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(58): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_UNSIGNED_LONG_LONG;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(63): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_FLOAT;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(68): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_DOUBLE;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(73): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_LONG_DOUBLE;
+                                          ^
+
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+compilation aborted for src/injector.cc (code 2)
+make: *** [Makefile:64: build/injector.o] Error 2
+make: *** Waiting for unfinished jobs....
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+mkdir -p build && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/timer.cc -o build/timer.o
+mkdir -p build && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/injector.cc -o build/injector.o
+mkdir -p build/chem && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/chem/integrals.cc -o build/chem/integrals.o
+mkdir -p build/chem && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/chem/chem_system.cc -o build/chem/chem_system.o
+mkdir -p build/chem && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/chem/rdm.cc -o build/chem/rdm.o
+mkdir -p build/chem && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/chem/dooh_util.cc -o build/chem/dooh_util.o
+mkdir -p build/chem && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/chem/product_table.cc -o build/chem/product_table.o
+mkdir -p build && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/util.cc -o build/util.o
+mkdir -p build/heg && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/heg/heg_system.cc -o build/heg/heg_system.o
+mkdir -p build/heg && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/heg/k_points.cc -o build/heg/k_points.o
+mkdir -p build/heg && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/heg/k_point.cc -o build/heg/k_point.o
+mkdir -p build/solver && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/solver/davidson.cc -o build/solver/davidson.o
+mkdir -p build/solver && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/solver/sparse_matrix.cc -o build/solver/sparse_matrix.o
+mkdir -p build/det && mpic++ -std=c++11 -O3 -fopenmp -Wall -Wextra -Wno-unused-result -I lib -c src/det/half_det.cc -o build/det/half_det.o
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+icpc: command line warning #10148: option '-Wno-unused-result' not supported
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(13): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_CHAR;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(18): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_SHORT;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(23): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_INT;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(28): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_LONG;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(33): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_LONG_LONG_INT;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(38): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_UNSIGNED_CHAR;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(43): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_UNSIGNED_SHORT;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(48): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_UNSIGNED;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(53): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_UNSIGNED_LONG;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(58): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_UNSIGNED_LONG_LONG;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(63): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_FLOAT;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(68): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_DOUBLE;
+                                          ^
+
+In file included from lib/fgpl/src/broadcast.h(2),
+                 from src/solver/solver.h(3),
+                 from src/injector.cc(7):
+lib/fgpl/src/internal/mpi_type.h(73): error: expression must have a constant value
+    constexpr static MPI_Datatype value = MPI_LONG_DOUBLE;
+                                          ^
+
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+compilation aborted for src/injector.cc (code 2)
+make: *** [Makefile:64: build/injector.o] Error 2
+make: *** Waiting for unfinished jobs....
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+remark #11074: Inlining inhibited by limit max-size 
+remark #11074: Inlining inhibited by limit max-total-size 
+remark #11076: To get full report use -qopt-report=4 -qopt-report-phase ipo
+make: *** Deleting file 'build/solver/davidson.o'
+make: *** Deleting file 'build/heg/heg_system.o'
+make: *** Deleting file 'build/chem/rdm.o'
+make: *** Deleting file 'build/chem/chem_system.o'
+make: *** Deleting file 'build/chem/integrals.o'
+make: *** [Makefile:64: build/chem/integrals.o] Interrupt
+make: *** [Makefile:64: build/chem/chem_system.o] Interrupt
+make: *** [Makefile:64: build/chem/rdm.o] Interrupt
+make: *** [Makefile:64: build/heg/heg_system.o] Interrupt
+make: *** [Makefile:64: build/solver/davidson.o] Interrupt
