@@ -453,3 +453,40 @@
  9162: WARNING.  Error in generate_space_most_populated
  9162: The number of states in the walker list is less than the number you requested. All states will be used.
  9162: 
+................
+16081: mneci:269345 terminated with signal 11 at PC=2b063294bc74 SP=7ffe9c50cef0.  Backtrace:
+16081: /mpcdf/soft/SLE_12_SP3/packages/x86_64/intel_parallel_studio/2018.4/compilers_and_libraries_2018.5.274/linux/mpi/intel64/lib/libmpi.so.12(+0x29bc74)[0x2b063294bc74]
+16081: /mpcdf/soft/SLE_12_SP3/packages/x86_64/intel_parallel_studio/2018.4/compilers_and_libraries_2018.5.274/linux/mpi/intel64/lib/libmpi.so.12(+0xe77af)[0x2b06327977af]
+16081: /mpcdf/soft/SLE_12_SP3/packages/x86_64/intel_parallel_studio/2018.4/compilers_and_libraries_2018.5.274/linux/mpi/intel64/lib/libmpi.so.12(PMPI_Allgatherv+0xd7c)[0x2b063279baec]
+16081: /mpcdf/soft/SLE_12_SP3/packages/x86_64/intel_parallel_studio/2018.4/compilers_and_libraries_2018.5.274/linux/mpi/intel64/lib/libmpifort.so.12(mpi_allgatherv_+0x7d)[0x2b063235dbfd]
+16081: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x56dfd8]
+16081: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x4e8035]
+16081: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x745fba]
+16081: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x83f6ec]
+16081: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x83dc97]
+16081: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x4d7b68]
+16081: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x41a8d1]
+16081: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x410b2d]
+16081: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x410122]
+16081: /lib64/libc.so.6(__libc_start_main+0xf5)[0x2b0633598725]
+16081: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x410029]
+16463:
+16463: mneci:74570 terminated with signal 11 at PC=2b2eb0d1cc74 SP=7ffd5a88c270.  Backtrace:
+16463: /mpcdf/soft/SLE_12_SP3/packages/x86_64/intel_parallel_studio/2018.4/compilers_and_libraries_2018.5.274/linux/mpi/intel64/lib/libmpi.so.12(+0x29bc74)[0x2b2eb0d1cc74]
+16463: /mpcdf/soft/SLE_12_SP3/packages/x86_64/intel_parallel_studio/2018.4/compilers_and_libraries_2018.5.274/linux/mpi/intel64/lib/libmpi.so.12(+0xe77af)[0x2b2eb0b687af]
+16463: /mpcdf/soft/SLE_12_SP3/packages/x86_64/intel_parallel_studio/2018.4/compilers_and_libraries_2018.5.274/linux/mpi/intel64/lib/libmpi.so.12(PMPI_Allgatherv+0xd7c)[0x2b2eb0b6caec]
+16463: /mpcdf/soft/SLE_12_SP3/packages/x86_64/intel_parallel_studio/2018.4/compilers_and_libraries_2018.5.274/linux/mpi/intel64/lib/libmpifort.so.12(mpi_allgatherv_+0x7d)[0x2b2eb072ebfd]
+16463: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x56dfd8]
+16463: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x4e8035]
+16463: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x745fba]
+16463: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x83f6ec]
+16463: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x83dc97]
+16463: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x4d7b68]
+16463: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x41a8d1]
+16463: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x410b2d]
+16463: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x410122]
+16463: /lib64/libc.so.6(__libc_start_main+0xf5)[0x2b2eb1969725]
+16463: /u/ndattani/NECI_2019_03_29/build/bin/mneci[0x410029]
+16556:
+16556: mneci:29387 terminated with signal 11 at PC=2abcb0a09c74 SP=7ffd488754f0.  Backtrace:
+    0: slurmstepd: error: *** STEP 911819.0 ON co4008 CANCELLED AT 2019-06-19T05:25:10 ***
