@@ -1,0 +1,27 @@
+                                  
+================================= 
+Global information about the job: 
+================================= 
+  
+Job owner: ndattani(31126)
+Job name:  Femoco_54_8b_620
+Node list: co[5000-5619]
+Job start: Wed Jul  3 12:03:03 CEST 2019
+Job end:   Wed Jul  3 13:45:47 CEST 2019
+Work dir:  /ptmp/ndattani/femoco/R1/1b/c/c/c/c/c/c/c/c/2b/c/c/c/c/c/c/c/8b/c/256/384/512/448/400/32b/./
+Command:   /cobra/ptmp/ndattani/femoco/R1/1b/c/c/c/c/c/c/c/c/2b/c/c/c/c/c/c/c/8b/c/256/384/512/448/400/32b/0submit
+  
+  
+  
+================================================================================ 
+Information on jobsteps (Note: MaxRSS is per task, cf. "man sacct"): 
+================================================================================ 
+  
+       JobID    JobName NNodes NTasks  NCPUS     MaxRSS    Elapsed ExitCode 
+------------ ---------- ------ ------ ------ ---------- ---------- -------- 
+946604       Femoco_54+    620         49600              01:42:44    0:125 
+946604.0          mneci    620  24800  24800   2235285K   01:42:07    0:125 
+  
+Maximum memory per node: 89.4114 GB
+CPU utilization: 89.0 %
+     
