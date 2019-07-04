@@ -1,0 +1,37 @@
+13,14c13
+< time 1416
+< (time 1000
+---
+> time 1405
+21c20
+<  totalwalkers 32e9
+---
+>  totalwalkers 8e9
+27c26
+< (trial-wavefunction 
+---
+>  trial-wavefunction 
+29,32c28,31
+< (  read-trial
+< (semi-stochastic 
+< (  pops-core  200000
+< ( read-core
+---
+>    read-trial
+>  semi-stochastic 
+> (  pops-core  500000
+>   read-core
+54,55c53,54
+< (((((write-core
+< (((((write-trial
+---
+> write-core
+> write-trial
+59c58
+< popsfiletimer 0.25 
+---
+> popsfiletimer 0.5
+63c62
+< (((((calcrdmonfly 3 0000 10
+---
+> calcrdmonfly 3 90000 10

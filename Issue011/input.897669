@@ -1,0 +1,73 @@
+title
+
+system read
+electrons 54
+spin-restrict 0
+nonuniformrandexcits 4ind-weighted-part-exact
+nobrillouintheorem
+(hphf 1
+molpromimic
+endsys
+
+calc
+time 1405
+methods
+method vertex fcimc
+endmethods
+(nmcyc 100000)
+diagshift 0.0
+shiftdamp 0.1
+ totalwalkers 8e9
+ STARTSINGLEPART 10000
+(startcas 6,6
+ walkcontgrow
+ readpops
+proje-changeref 1.2
+ trial-wavefunction 
+(pops-trial  1000
+   read-trial
+ semi-stochastic 
+(  pops-core  500000
+  read-core
+tau 0.001 search
+(max-tau 0.000005
+truncinitiator
+addtoinitiator 3
+(shiftequilsteps 2000
+maxwalkerbloom 1
+allrealcoeff
+realspawncutoff 0.3
+memoryfacpart  2.5 
+memoryfacspawn  2.1 
+stepsshift 10
+jump-shift
+(definedet 1 2 3 4  6 14
+en2-initiator
+endcalc
+
+integral
+(partiallyfreezevirt  197,0
+endint
+
+logging
+write-core
+write-trial
+(binarypops
+(compare-trial-and-fciqmc-amps
+hist-excit-tofrom
+popsfiletimer 0.5
+(highlypopwrite 15
+printorboccs 1000
+writeinitiators
+calcrdmonfly 3 90000 10
+(rdm-main-size-fac 0.01
+(rdm-spawn-size-fac 0.01
+(rdm-recv-size-fac 0.01
+hdf5-pops-write
+hdf5-pops-read
+write-spin-free-rdm
+diagflyonerdm
+PRINTRODUMP
+(printonerdm 
+endlog
+end
