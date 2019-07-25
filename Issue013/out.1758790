@@ -1,0 +1,391 @@
+ **********************************************************************
+                          MRCC program system
+ **********************************************************************
+ 
+                              Written by
+    Mihaly Kallay, Zoltan Rolik, Jozsef Csontos, Istvan Ladjanszki,
+       Lorant Szegedy, Bence Ladoczki, Gyula Samu, Klara Petrov,
+        Mate Farkas, Peter Nagy, David Mester, and Bence Hegely
+ 
+        Department of Physical Chemistry and Materials Science
+            Budapest University of Technology and Economics
+                  Budapest P.O.Box 91, H-1521 Hungary
+ 
+                              www.mrcc.hu
+
+ ************************ 2019-06-18 18:40:21 *************************
+ Executing minp...
+
+ Reading input from MINP...
+ 
+ Input file:
+ 
+# TITLE
+#basis=V6Z-EMSL
+uncontract=off
+iface=cfour
+calc=CC(4)(5)
+mem=726GB
+#core=1
+core=frozen
+itol=18
+scftol=13
+cctol=5
+ccmaxit=999
+scfmaxit=9999
+scftype=RHF
+rohftype=semicanonical
+scfiguess=ao
+rest=1
+charge=+0
+mult=1
+symm=1
+#occ=3,0,0,0,0,1,2,2/3,0,0,0,0,1,1,1
+
+#refdet=serialno
+#1
+#2,3
+
+#geom
+#unit=angstroms
+#
+#O
+#H 1 R
+#H 1 R 2 HOH
+#
+#R=0.9576257
+#HOH=104.51
+
+
+
+#Li 1 R
+
+#R=3.065
+
+
+tprint=0.01
+verbosity=5
+#nstate=4
+
+
+ 
+ 
+ Checking keyword combinations...
+ 
+ Keywords:
+ 
+ active=none
+ agrid=ld0006-ld0590
+ basis=
+ basopt=off
+ bpcompo=0.985
+ bpcompv=0.98
+ bpdfo=0.985
+ bpocc=0.985
+ bppdo=0.985
+ bppdv=0.98
+ bpedo=0.985
+ bpedv=0.98
+ calc=cc(4)(5)
+ ccmaxit=999
+ ccprog=mrcc
+ cctol=5
+ charge=+0
+ cialg=disk
+ ciguess=off
+ cmpgrp=auto
+ core=frozen
+ corembed=off
+ dboc=off
+ dendec=cholesky
+ dens=0
+ dfalg=invsqrt
+ dfbasis_cor=none
+ dfbasis_scf=none
+ dfintran=ovirt
+ dft=off
+ diag=david
+ domrad=10.d0
+ drpaalg=fit
+ ecp=auto
+ edisp=off
+ embed=off
+ epert=none
+ eps=0.975
+ excrad=0.d0
+ excrad_fin=0.000000000D+00
+ freq=off
+ gauss=spher
+ geom=zmat
+ gopt=off
+ ghost=none
+ gtol=7
+ grtol=10
+ hamilton=dc
+ iface=cfour
+ intalg=auto
+ itol=18
+ lcorthr=loose
+ lccrest=off
+ lmp2dens=on
+ lnoepso=3e-5
+ lnoepsv=1e-6
+ localcc=off
+ locintrf=disk
+ maxact=off
+ maxex=0
+ bfbasis=none
+ mem=726gb
+ molden=on
+ mulmet=0
+ mult=1
+ nacto=0
+ nactv=0
+ naf_cor=off
+ naf_scf=off
+ nafalg=albe
+ naftyp=
+ nchol=auto
+ ndeps=1e-3
+ nstate=1
+ nsing=0
+ ntrip=0
+ occ=
+ optalg=
+ optmaxit=50
+ optetol=1e-6
+ optgtol=1e-4
+ optstol=1e-3
+ orblocc=off
+ orbloco=off
+ orblocv=off
+ osveps=1e-3
+ ovirt=off
+ ovosnorb=80.0
+ ptfreq=0.0
+ popul=off
+ pressure=100000
+ qmmm=off
+ refdet=none
+ rest=1
+ rgrid=log3
+ rohftype=semicanonical
+ scspe=1.d0
+ scsps=1.2d0
+ scspt=0.33333333333333
+ scfalg=auto
+ scfdamp=off
+ scfdiis=on
+ scfdiis_end=9999
+ scfdiis_start=1
+ scfdiis_step=1
+ scfdtol=17
+ scfext=10
+ scfiguess=ao
+ scflshift=off
+ scfmaxit=9999
+ scftype=rhf
+ scftol=13
+ spairtol=1e-4
+ symm=1
+ talg=occ
+ temp=298.15
+ test=off
+ tprint=0.01
+ uncontract=off
+ unit=angs
+ verbosity=5
+ wpairtol=0.100000000E-05
+
+ ************************ 2019-06-18 18:40:22 *************************
+ Executing goldstone...
+
+ Generation of CC equations in terms of H and T...
+ Generation of antisymmetrized Goldstone diagrams...
+ Number of diagrams in T^1 equations:    15
+ Number of diagrams in T^2 equations:    38
+ Number of diagrams in T^3 equations:    54
+ Number of diagrams in T^4 equations:    76
+ Number of diagrams in T^5 equations:     8
+ Translation of diagrams to factorized equations...
+ Optimizing intermediate calculation...
+ Number of floating-point operations per iteration step:   1.4318E+16
+ Probable CPU time per iteration step (hours): 143182.82
+ Required memory (Mbytes): *********
+ Number of intermediates:                                 120
+ Number of intermediates to be stored:                     51
+ Length of intermediate file (Mbytes):  204967.9
+
+ ************************ 2019-06-18 18:40:22 *************************
+ Executing xmrcc...
+
+ **********************************************************************
+ CC(4)(5) calculation 
+ 
+ 
+ Allocation of****** Mbytes of memory...
+ Number of spinorbitals:                   164
+ Number of alpha electrons:                       11
+ Number of beta electrons:                        11
+ Spin multiplicity:                     1
+ z-component of spin:  0.0
+ Spatial symmetry:                      1
+ Convergence criterion:  1.0E-05
+ Construction of occupation graphs...
+ Number of                     0 -fold excitations:                      1
+ Number of                     1 -fold excitations:                    498
+ Number of                     2 -fold excitations:                 237003
+ Number of                     3 -fold excitations:               59044580
+ Number of                     4 -fold excitations:             8539628535
+ Total number of configurations:             8598910617
+ Calculation of coupling coefficients...
+ Length of intermediate file (Mbytes):  120984.8
+ 
+ ======================================================================
+ 
+ Spin case  1   Alpha:  0   Beta:  5
+ Number of excitations:             1502894554
+ Spin case  2   Alpha:  1   Beta:  4
+ Number of excitations:            62597592610
+ Spin case  3   Alpha:  2   Beta:  3
+ Number of excitations:           322402950625
+ Number of                     5 -fold excitations:           773006875578
+ 
+ Memory requirements /Mbyte/: 
+               Minimal        Optimal
+ Real*8:     746979.0003    746979.0003
+ Integer:       312.1394
+ Total:      747291.1398    747291.1398
+ 
+
+ ************************ 2019-06-18 18:40:30 *************************
+ Executing goldstone...
+
+ Generation of CC equations in terms of H and T...
+ Generation of antisymmetrized Goldstone diagrams...
+ Number of diagrams in T^1 equations:    15
+ Number of diagrams in T^2 equations:    38
+ Number of diagrams in T^3 equations:    54
+ Number of diagrams in T^4 equations:    76
+ Number of diagrams in T^5 equations:     8
+ Translation of diagrams to factorized equations...
+ Optimizing intermediate calculation...
+ Number of floating-point operations per iteration step:   1.4318E+16
+ Probable CPU time per iteration step (hours): 143182.82
+ Required memory (Mbytes): *********
+ Number of intermediates:                                 120
+ Number of intermediates to be stored:                     51
+ Length of intermediate file (Mbytes):  204967.9
+
+ ************************ 2019-06-18 18:40:31 *************************
+ Executing xmrcc...
+
+ **********************************************************************
+ CC(4)(5) calculation 
+ 
+ 
+ Allocation of****** Mbytes of memory...
+ Number of spinorbitals:                   164
+ Number of alpha electrons:                       11
+ Number of beta electrons:                        11
+ Spin multiplicity:                     1
+ z-component of spin:  0.0
+ Spatial symmetry:                      1
+ Convergence criterion:  1.0E-05
+ Construction of occupation graphs...
+ Number of                     0 -fold excitations:                      1
+ Number of                     1 -fold excitations:                    498
+ Number of                     2 -fold excitations:                 237003
+ Number of                     3 -fold excitations:               59044580
+ Number of                     4 -fold excitations:             8539628535
+ Total number of configurations:             8598910617
+ Calculation of coupling coefficients...
+ Length of intermediate file (Mbytes):  120984.8
+ 
+ ======================================================================
+ 
+ Spin case  1   Alpha:  0   Beta:  5
+ Number of excitations:             1502894554
+ Spin case  2   Alpha:  1   Beta:  4
+ Number of excitations:            62597592610
+ Spin case  3   Alpha:  2   Beta:  3
+ Number of excitations:           322402950625
+ Number of                     5 -fold excitations:           773006875578
+ 
+ Memory requirements /Mbyte/: 
+               Minimal        Optimal
+ Real*8:     691829.0484    691829.0484
+ Integer:       312.1394
+ Total:      692141.1879    692141.1879
+ 
+
+ ************************ 2019-06-18 18:40:46 *************************
+ Executing mrcc...
+
+ **********************************************************************
+ CCSDTQ(P) calculation                                                  
+ 
+ 
+ OpenMP parallel version is running.
+ Number of CPUs:  10
+ Allocation of******* Mbytes of memory...
+ Number of spinorbitals: 164
+ Number of alpha electrons: 11
+ Number of beta  electrons: 11
+ Spin multiplicity: 1
+ z-component of spin:  0.0
+ Spatial symmetry: 1
+ Convergence criterion:  1.0E-05
+ Construction of occupation graphs...
+ Number of 0-fold excitations: 1
+ Number of 1-fold excitations: 498
+ Number of 2-fold excitations: 237003
+ Number of 3-fold excitations: 59044580
+ Number of 4-fold excitations: 8539628535
+ Total number of determinants: 8598910617
+ Calculation of coupling coefficients...
+ Initial cluster amplitudes are read from unit 16.
+ Length of intermediate file (Mbytes):  120984.8
+ Reading integral list from unit 55...
+ Sorting integrals...
+ Energy of reference determinant [au]:    -154.962582161745
+ Calculation of MP denominators...
+ 
+ Starting CC iteration...
+ ======================================================================
+ Norm of residual vector:     0.00000402
+ CPU time [min]:  4759.230                   Wall time [min]:   732.080
+ 
+ Iteration  1  CC energy:  -155.55743042  Energy decrease:   0.00000007
+ ======================================================================
+ 
+ Iteration has converged in  1 steps.
+ 
+ Final results:
+ Total CCSDTQ energy [au]:          -155.557430417405
+ 
+ Perturbative corrections are calculated...
+ ======================================================================
+ Spin case  1   Alpha:  0   Beta:  5
+ Number of excitations:        1502894554
+ CPU time [min]: 11102.475                   Wall time [min]:  1485.262
+ ======================================================================
+ Spin case  2   Alpha:  1   Beta:  4
+ Number of excitations:        62597592610
+ 
+ Fatal error in mrcc.
+ Program will stop.
+ 
+ ************************ 2019-07-22 23:14:09 *************************
+                   Error at the termination of mrcc.
+ **********************************************************************
+--- SharcNET Job Epilogue ---
+Job returned with status 1.
+               jobid: 1758790
+               resid: 3235688
+         exit status: 1
+      allocated time: 2954030
+           user time: 25843300
+         system time: 15959.8
+peak rss=744103084032; peak vsz=756622835712 (bytes)
+atime=2954030; utime=25843300; stime=15959.8; exit=1
