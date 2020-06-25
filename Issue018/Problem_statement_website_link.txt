@@ -1,1 +1,0 @@
-https://mattermodeling.stackexchange.com/questions/1380/how-to-rectify-the-error-lost-atoms-original-28437-current-3659-in-lammps
