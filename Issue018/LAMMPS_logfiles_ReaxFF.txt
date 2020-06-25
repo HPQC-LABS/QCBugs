@@ -1,0 +1,260 @@
+LAMMPS (15 Apr 2020)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (../comm.cpp:94)
+  using 1 OpenMP thread(s) per MPI task
+##############################################################
+# Al-TiB2 MMC material, MD simulation to indent and scratch ##
+##############################################################
+
+# -------------- Initialisation -------------------#
+
+units           metal
+boundary        p p p
+atom_style      charge
+timestep        0.001
+
+read_data       SE_charge.dat
+  orthogonal box = (-48.222 -35.404 -131.72) to (87.295 102.094 216.506)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  28437 atoms
+  read_data CPU = 0.0568805 secs
+mass    1 14.0067   #Nitrogen
+mass    2 12.0107   #Carbon
+mass    3 15.9940   #Oxygen
+mass    4 32.0650   #Sulphur
+
+
+#Substrate
+
+region           sars block INF INF INF INF INF 300 units box
+group            sars region sars
+28437 atoms in group sars
+
+#Indenter
+
+region           top block INF INF INF INF 300 INF units box
+group            top region top
+0 atoms in group top
+
+#Potentials
+
+pair_style      reax/c NULL
+pair_coeff      * * SARS.ff N C O S
+WARNING: Changed valency_val to valency_boc for HE (../reaxc_ffield.cpp:315)
+WARNING: Changed valency_val to valency_boc for NE (../reaxc_ffield.cpp:315)
+WARNING: Changed valency_val to valency_boc for X (../reaxc_ffield.cpp:315)
+compute         peratom all pe/atom
+neighbor        0.5 bin
+neigh_modify delay 20 every 1 check yes page 500000 one 50000
+
+#Initialisation
+
+velocity all create 353 511124 rot yes mom yes
+variable        t_step equal "step"
+variable        t_temp equal "temp"
+thermo          100
+thermo_style    custom step press temp pe
+
+#Relaxation
+
+fix rigid sars addforce 0.0 0.0 0.0
+fix relax top nvt temp 250 250 0.01
+fix charge all qeq/reax 1 0.0 10.0 1.0e-6 reax/c
+variable t equal 0.005
+timestep ${t}
+timestep 0.005
+dump 1 all custom 500 equil.*.dump id type x y z fx fy fz
+
+run 2000
+Neighbor list info ...
+  update every 1 steps, delay 20 steps, check yes
+  max neighbors/atom: 50000, page size: 500000
+  master list distance cutoff = 10.5
+  ghost atom cutoff = 10.5
+  binsize = 5.25, bins = 26 27 67
+  2 neighbor lists, perpetual/occasional/extra = 2 0 0
+  (1) pair reax/c, perpetual
+      attributes: half, newton off, ghost
+      pair build: half/bin/newtoff/ghost
+      stencil: half/ghost/bin/3d/newtoff
+      bin: standard
+  (2) fix qeq/reax, perpetual, copy from (1)
+      attributes: half, newton off, ghost
+      pair build: copy
+      stencil: none
+      bin: none
+Per MPI rank memory allocation (min/avg/max) = 586.1 | 586.1 | 586.1 Mbytes
+Step Press Temp PotEng 
+       0    474276.52          353   -3006969.7 
+     100    474276.52          353   -3006969.7 
+     200    474276.54          353   -3006969.7 
+     300    474276.49          353   -3006969.7 
+     400    474276.51          353   -3006969.7 
+     500     474276.5          353   -3006969.7 
+     600    474276.52          353   -3006969.7 
+     700    474276.53          353   -3006969.7 
+     800    474276.53          353   -3006969.7 
+     900    474276.52          353   -3006969.7 
+    1000    474276.53          353   -3006969.7 
+    1100    474276.54          353   -3006969.7 
+    1200    474276.54          353   -3006969.7 
+    1300    474276.51          353   -3006969.7 
+    1400    474276.54          353   -3006969.7 
+    1500    474276.52          353   -3006969.7 
+    1600     474276.5          353   -3006969.7 
+    1700    474276.51          353   -3006969.7 
+    1800    474276.52          353   -3006969.7 
+    1900    474276.52          353   -3006969.7 
+    2000    474276.53          353   -3006969.7 
+Loop time of 6241.23 on 1 procs for 2000 steps with 28437 atoms
+
+Performance: 0.138 ns/day, 173.368 hours/ns, 0.320 timesteps/s
+99.6% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 5249.2     | 5249.2     | 5249.2     |   0.0 | 84.11
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.047973   | 0.047973   | 0.047973   |   0.0 |  0.00
+Output  | 0.64582    | 0.64582    | 0.64582    |   0.0 |  0.01
+Modify  | 991.02     | 991.02     | 991.02     |   0.0 | 15.88
+Other   |            | 0.3195     |            |       |  0.01
+
+Nlocal:    28437 ave 28437 max 28437 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    1389 ave 1389 max 1389 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    2.4583e+06 ave 2.4583e+06 max 2.4583e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 2458304
+Ave neighs/atom = 86.4474
+Neighbor list builds = 0
+Dangerous builds = 0
+
+
+#Indentation
+
+fix 1 top addforce 0.0 -0.05 0.0
+fix fix1 all nvt temp 250 250 0.01
+dump 2 all custom 100 sars-Indent.*.dump id type x y z fx fy fz
+
+run 1000
+Per MPI rank memory allocation (min/avg/max) = 590.3 | 590.3 | 590.3 Mbytes
+Step Press Temp PotEng 
+    2000    474276.52          353   -3006969.7 
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2001 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2001 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2002 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2002 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2003 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2003 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2004 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2004 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2005 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2005 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2006 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2006 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2007 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2007 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2008 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2008 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2009 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2009 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2010 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2010 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2011 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2011 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2012 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2012 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2013 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2013 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2014 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2014 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2021 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2021 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2022 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2022 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2023 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2023 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2024 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2024 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2025 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2025 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2026 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2026 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2027 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2027 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2028 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2028 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2029 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2029 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2030 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2030 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2031 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2031 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2032 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2032 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2033 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2033 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2034 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2034 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2035 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2035 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2036 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2041 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2041 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2042 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2042 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2043 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2043 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2044 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2044 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2045 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2045 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2046 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2046 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2047 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2047 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2048 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2048 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2049 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2049 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2050 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2050 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2051 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2051 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2052 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2052 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2053 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2053 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2062 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2062 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2063 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2063 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2064 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2064 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2065 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2065 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2066 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2066 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2067 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2067 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2068 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2068 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2069 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2069 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2071 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2071 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2082 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2082 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2083 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2083 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2084 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2084 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2086 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2086 step (../fix_qeq_reax.cpp:735)
+WARNING: Fix qeq/reax CG convergence failed after 200 iterations at 2087 step (../fix_qeq_reax.cpp:735)
+ERROR: Lost atoms: original 28437 current 23374 (../thermo.cpp:438)
+Last command: run 1000
