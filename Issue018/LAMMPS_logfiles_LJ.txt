@@ -1,0 +1,167 @@
+LAMMPS (15 Apr 2020)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (../comm.cpp:94)
+  using 1 OpenMP thread(s) per MPI task
+##############################################################
+# Al-TiB2 MMC material, MD simulation to indent and scratch ##
+##############################################################
+
+# -------------- Initialisation -------------------#
+
+units           metal
+boundary        p p p
+atom_style      atomic
+timestep        0.001
+
+read_data       SE_atomic.dat
+  orthogonal box = (-48.222 -35.404 -131.72) to (87.295 102.094 216.506)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  28437 atoms
+  read_data CPU = 0.130144 secs
+mass    1 14.0067   #Nitrogen
+mass    2 12.0107   #Carbon
+mass    3 15.9940   #Oxygen
+mass    4 32.0650   #Sulphur
+
+
+#Substrate
+
+region           sars block INF INF INF INF INF 300 units box
+group            sars region sars
+28437 atoms in group sars
+
+#Indenter
+
+region           top block INF INF INF INF 300 INF units box
+group            top region top
+0 atoms in group top
+
+#Potentials
+
+#pair_style      reax/c NULL
+#pair_coeff      * * SARS.ff H C N O S
+
+pair_style       lj/cut 2.5
+#kspace_style    ewald 0.0001
+#kspace_modify gewald 0.27
+
+pair_coeff  1  1  0.0163859696   2.9565
+pair_coeff  1  2  0.07146236771  3.1365
+pair_coeff  1  3  0.07168744659  2.9165
+pair_coeff  1  4  0.02856991424  2.8232
+pair_coeff  2  2  0.12219124354  3.2615
+pair_coeff  2  3  0.12257609881  3.0415
+pair_coeff  2  4  0.04885079323  2.9482
+pair_coeff  3  3  0.07146236771  3.1365
+pair_coeff  3  4  0.07168744659  2.9165
+pair_coeff  4  4  0.09181993247  3.0815
+
+
+compute         peratom all pe/atom
+neighbor        2.0 bin
+neigh_modify delay 20 every 1 check yes page 500000 one 50000
+
+#Initialisation
+
+velocity all create 353 511124 rot yes mom yes
+variable        t_step equal "step"
+variable        t_temp equal "temp"
+thermo          100
+thermo_style    custom step press temp pe
+
+#Relaxation
+
+fix rigid sars addforce 0.0 0.0 0.0
+fix relax top nvt temp 250 250 0.01
+#fix charge all qeq/reax 1 0.0 10.0 1.0e-6 reax/c
+variable t equal 0.005
+timestep ${t}
+timestep 0.005
+dump 1 all custom 500 equil.*.dump id type x y z fx fy fz
+
+run 3000
+Neighbor list info ...
+  update every 1 steps, delay 20 steps, check yes
+  max neighbors/atom: 50000, page size: 500000
+  master list distance cutoff = 4.5
+  ghost atom cutoff = 4.5
+  binsize = 2.25, bins = 61 62 155
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton
+      stencil: half/bin/3d/newton
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 14.61 | 14.61 | 14.61 Mbytes
+Step Press Temp PotEng 
+       0 4.4644343e+13          353 4.5200935e+13 
+     100 4.4644343e+13          353 4.5200935e+13 
+     200 4.4644343e+13          353 4.5200935e+13 
+     300 4.4644343e+13          353 4.5200935e+13 
+     400 4.4644343e+13          353 4.5200935e+13 
+     500 4.4644343e+13          353 4.5200935e+13 
+     600 4.4644343e+13          353 4.5200935e+13 
+     700 4.4644343e+13          353 4.5200935e+13 
+     800 4.4644343e+13          353 4.5200935e+13 
+     900 4.4644343e+13          353 4.5200935e+13 
+    1000 4.4644343e+13          353 4.5200935e+13 
+    1100 4.4644343e+13          353 4.5200935e+13 
+    1200 4.4644343e+13          353 4.5200935e+13 
+    1300 4.4644343e+13          353 4.5200935e+13 
+    1400 4.4644343e+13          353 4.5200935e+13 
+    1500 4.4644343e+13          353 4.5200935e+13 
+    1600 4.4644343e+13          353 4.5200935e+13 
+    1700 4.4644343e+13          353 4.5200935e+13 
+    1800 4.4644343e+13          353 4.5200935e+13 
+    1900 4.4644343e+13          353 4.5200935e+13 
+    2000 4.4644343e+13          353 4.5200935e+13 
+    2100 4.4644343e+13          353 4.5200935e+13 
+    2200 4.4644343e+13          353 4.5200935e+13 
+    2300 4.4644343e+13          353 4.5200935e+13 
+    2400 4.4644343e+13          353 4.5200935e+13 
+    2500 4.4644343e+13          353 4.5200935e+13 
+    2600 4.4644343e+13          353 4.5200935e+13 
+    2700 4.4644343e+13          353 4.5200935e+13 
+    2800 4.4644343e+13          353 4.5200935e+13 
+    2900 4.4644343e+13          353 4.5200935e+13 
+    3000 4.4644343e+13          353 4.5200935e+13 
+Loop time of 20.629 on 1 procs for 3000 steps with 28437 atoms
+
+Performance: 62.824 ns/day, 0.382 hours/ns, 145.426 timesteps/s
+98.2% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 15.761     | 15.761     | 15.761     |   0.0 | 76.40
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.021963   | 0.021963   | 0.021963   |   0.0 |  0.11
+Output  | 1.806      | 1.806      | 1.806      |   0.0 |  8.75
+Modify  | 2.3991     | 2.3991     | 2.3991     |   0.0 | 11.63
+Other   |            | 0.6408     |            |       |  3.11
+
+Nlocal:    28437 ave 28437 max 28437 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    333 ave 333 max 333 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    231293 ave 231293 max 231293 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 231293
+Ave neighs/atom = 8.13352
+Neighbor list builds = 0
+Dangerous builds = 0
+
+
+#Indentation
+
+fix 1 top addforce 0.0 -0.05 0.0
+fix fix1 all nvt temp 250 250 0.01
+dump 2 all custom 100 sars-Indent.*.dump id type x y z fx fy fz
+
+run 1000
+Per MPI rank memory allocation (min/avg/max) = 18.85 | 18.85 | 18.85 Mbytes
+Step Press Temp PotEng 
+    3000 4.4644343e+13          353 4.5200935e+13 
+ERROR: Lost atoms: original 28437 current 3659 (../thermo.cpp:438)
+Last command: run 1000
