@@ -1,0 +1,59 @@
+# -------------- Initialisation -------------------#
+
+units           metal
+boundary        p p p
+atom_style      charge
+timestep        0.001
+
+read_data       SE_charge.dat
+mass    1 14.0067   #Nitrogen
+mass    2 12.0107   #Carbon
+mass    3 15.9940   #Oxygen
+mass    4 32.0650   #Sulphur
+
+
+#Substrate
+
+region           sars block INF INF INF INF INF 300 units box
+group            sars region sars
+
+#Indenter
+
+region           top block INF INF INF INF 300 INF units box
+group            top region top
+
+#Potentials
+
+pair_style      reax/c NULL
+pair_coeff      * * SARS.ff N C O S
+compute         peratom all pe/atom
+neighbor        0.5 bin
+neigh_modify delay 20 every 1 check yes page 500000 one 50000
+
+#Initialisation
+
+velocity all create 353 511124 rot yes mom yes
+variable        t_step equal "step"
+variable        t_temp equal "temp"
+thermo          100
+thermo_style    custom step press temp pe
+
+#Relaxation
+
+fix rigid sars addforce 0.0 0.0 0.0
+fix relax top nvt temp 250 250 0.01
+fix charge all qeq/reax 1 0.0 10.0 1.0e-6 reax/c
+variable t equal 0.005
+timestep ${t}
+dump 1 all custom 500 equil.*.dump id type x y z fx fy fz
+
+run 2000
+
+
+#Indentation
+
+fix 1 top addforce 0.0 -0.05 0.0
+fix fix1 all nvt temp 250 250 0.01
+dump 2 all custom 100 sars-Indent.*.dump id type x y z fx fy fz
+
+run 1000
