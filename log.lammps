@@ -1,0 +1,173 @@
+LAMMPS (15 Apr 2020)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (../comm.cpp:94)
+  using 1 OpenMP thread(s) per MPI task
+# Tribological detachment of SARS-CoV-2 Spike Glycoprotein.
+
+# definition
+units           real                                                        # types of units used
+dimension       3                                                           # Defines a 3D simulation
+processors      * * *                                                       # Command for optimum usage of processors
+boundary        p p p                                                       # Defines periodic boundary conditions
+atom_style      charge                                                      # Defines atom type to be charge
+
+# SARS Input
+read_data       lipid.dat                                                   # Reads the datafile
+  orthogonal box = (-99.923 -24.73 -64.058) to (99.923 184.496 64.058)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  51227 atoms
+  read_data CPU = 0.091445 secs
+mass            1 12.0107                                                   #Carbon
+mass            2 14.0067                                                   #Nitrogen
+mass            3 15.9940                                                   #Oxygen
+mass            4 32.0650                                                   #Sulphur
+
+# create the abrasive atoms
+#lattice         diamond 3.57                                                # Defines a diamond lattice with unit length 3.57A
+region carbonatoms block -96 -79 23 34 -8 11                                        # Defines a 3D block region called "abrasive" that is made up of the unit cell in the x-, y-, and z-direction for the given dimensions
+#create_box      1 box                                                      # Creates a simulation box for the abrasive region.
+#create_atoms    1 box                                                       # Creates atoms within the simulation box.
+#mass            1 12.0107                                                   # Assign the mass of carbon.
+group           carbonatoms region carbonatoms                                          # Assigns the name carbonatoms to atom type 1.
+3 atoms in group carbonatoms
+
+
+
+# Group the  SARS data file
+region          sars block -100 100 -26 185 -65 65 units box                # Create a region for the datafile
+group           sars region sars                                            # group the input file with the name "sars"
+51227 atoms in group sars
+
+# Interatomic potentials
+pair_style      reax/c NULL                                                 # Pair potential style ReaxFF
+pair_coeff      * * ffield.reax.FC C N O S                                  # Assign Respective atoms
+Reading potential file ffield.reax.FC with DATE: 2013-06-28
+WARNING: Changed valency_val to valency_boc for X (../reaxc_ffield.cpp:315)
+
+# Settings
+compute         peratom all pe/atom                                         # Compute potential energy per atoms
+neighbor        2.0 bin                                                       # NEVER KNEW WHAT THIS IS !!!!!!!!!
+#neigh_modify    delay 5                                                     #------------""----------""--------
+neigh_modify delay 20 every 1 check yes page 500000 one 50000
+
+# Initialization
+velocity        all create 350 123456                                       # Setting temperature to 350 K
+variable        t_step equal "step"                                         # Assigning a variable for step
+variable        t_temp equal "temp"                                         # Assigning a variable for temperature
+thermo          100                                                         # Show [#] for every 100 steps
+thermo_style    custom step press temp pe                                   # Show [temp and step & PE ]
+
+# Relaxation
+#fix             rigid sars addforce 0.0 0.0 0.0                             # Make the sars group immobile by reducing force to 'zero' in all direction
+#fix             relax carbonatoms npt temp 250 250 0.5 iso 0 0 0.5 drag 1   # The start and end temperatures of abrasive is 250K and start and end pressure of abrasive is 0 and the abrasive is damped.
+fix             charge all qeq/reax 1 0.0 10.0 1.0e-6 reax/c                # Fix needed for reaxFF. DONNO WHAT THIS DOES !!!!!!
+variable        t equal 1                                                   # Assigning timestep
+timestep        ${t}                                                        # Equating timestep
+timestep        1                                                        
+dump            1 all custom 200 equil.*.dump id type x y z fx fy fz        # Dump 'atom id' 'atom type' 'x,y,z coordinates' 'force along x,y,z coordinates'
+run             1                                                        # Run for 2000 time steps
+Neighbor list info ...
+  update every 1 steps, delay 20 steps, check yes
+  max neighbors/atom: 50000, page size: 500000
+  master list distance cutoff = 12
+  ghost atom cutoff = 12
+  binsize = 6, bins = 34 35 22
+  2 neighbor lists, perpetual/occasional/extra = 2 0 0
+  (1) pair reax/c, perpetual
+      attributes: half, newton off, ghost
+      pair build: half/bin/newtoff/ghost
+      stencil: half/ghost/bin/3d/newtoff
+      bin: standard
+  (2) fix qeq/reax, perpetual, copy from (1)
+      attributes: half, newton off, ghost
+      pair build: copy
+      stencil: none
+      bin: none
+Per MPI rank memory allocation (min/avg/max) = 1299 | 1299 | 1299 Mbytes
+Step Press Temp PotEng 
+       0   -10766.276          350   -3905465.6 
+       1    -10766.28          350   -3905465.6 
+Loop time of 5.4404 on 1 procs for 1 steps with 51227 atoms
+
+Performance: 0.016 ns/day, 1511.221 hours/ns, 0.184 timesteps/s
+99.4% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 3.7494     | 3.7494     | 3.7494     |   0.0 | 68.92
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.0001034  | 0.0001034  | 0.0001034  |   0.0 |  0.00
+Output  | 0.0027405  | 0.0027405  | 0.0027405  |   0.0 |  0.05
+Modify  | 1.688      | 1.688      | 1.688      |   0.0 | 31.03
+Other   |            | 0.0001042  |            |       |  0.00
+
+Nlocal:    51227 ave 51227 max 51227 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    13650 ave 13650 max 13650 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    6.23875e+06 ave 6.23875e+06 max 6.23875e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 6238751
+Ave neighs/atom = 121.786
+Neighbor list builds = 0
+Dangerous builds = 0
+
+# always remove fixes that are no longer needed
+#unfix rigid
+#unfix relax
+#unfix charge
+#Scratching
+
+fix  2 carbonatoms move linear -5 0 0 units box                              # Apply force in x direction for wear @ 5 Angstroms/femtosecond
+dump 3 all custom 100 sars-Scratch.*.dump id type x y z fx fy fz            # Dump 'atom id' 'atom type' 'x,y,z coordinates' 'force along x,y,z coordinates'
+run 1000                                                                   # Run for 2000 time steps
+Per MPI rank memory allocation (min/avg/max) = 1300 | 1300 | 1300 Mbytes
+Step Press Temp PotEng 
+       1   -10766.277          350   -3905465.6 
+     100   -562.05515    8180.9385   -3905397.2 
+     200   -562.05562    8180.9385   -3905397.2 
+     300   -562.05498    8180.9385   -3905397.2 
+     400   -562.05579    8180.9385   -3905397.2 
+     500   -562.05559    8180.9385   -3905397.2 
+     600    -562.0559    8180.9385   -3905397.2 
+     700    -562.0552    8180.9385   -3905397.2 
+     800   -562.05578    8180.9385   -3905397.2 
+     900   -562.05555    8180.9385   -3905397.2 
+    1000   -562.05588    8180.9385   -3905397.2 
+    1001   -562.19269    8180.9385     -3905428 
+Loop time of 7549.05 on 1 procs for 1000 steps with 51227 atoms
+
+Performance: 0.011 ns/day, 2096.958 hours/ns, 0.132 timesteps/s
+63.8% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 4092.2     | 4092.2     | 4092.2     |   0.0 | 54.21
+Neigh   | 10.099     | 10.099     | 10.099     |   0.0 |  0.13
+Comm    | 0.1589     | 0.1589     | 0.1589     |   0.0 |  0.00
+Output  | 2721.7     | 2721.7     | 2721.7     |   0.0 | 36.05
+Modify  | 724.69     | 724.69     | 724.69     |   0.0 |  9.60
+Other   |            | 0.1211     |            |       |  0.00
+
+Nlocal:    51227 ave 51227 max 51227 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:    13650 ave 13650 max 13650 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    6.23872e+06 ave 6.23872e+06 max 6.23872e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 6238720
+Ave neighs/atom = 121.786
+Neighbor list builds = 50
+Dangerous builds = 50
+
+# End simulation
+print "All done"                                                            # HOPE TO SEE THIS AT THE END OF SCREEN
+All done
+
+Please see the log.cite file for references relevant to this simulation
+
+Total wall time: 2:06:06

@@ -1,0 +1,61 @@
+# Tribological detachment of SARS-CoV-2 Spike Glycoprotein.
+
+# definition
+units           real                                                        # types of units used
+dimension       3                                                           # Defines a 3D simulation
+processors      * * *                                                       # Command for optimum usage of processors
+boundary        p p p                                                       # Defines periodic boundary conditions
+atom_style      charge                                                      # Defines atom type to be charge
+
+# SARS Input
+read_data       lipid.dat                                                   # Reads the datafile
+mass            1 12.0107                                                   #Carbon
+mass            2 14.0067                                                   #Nitrogen
+mass            3 15.9940                                                   #Oxygen
+mass            4 32.0650                                                   #Sulphur
+
+# Group the abrasive atoms
+region          carbonatoms block -96 -79 23 34 -8 11                                        # Defines a 3D block region called "abrasive" that is made up of the unit cell in the x-, y-, and z-direction for the given dimensions
+group           carbonatoms region carbonatoms                                          # Assigns the name carbonatoms to atom type 1.
+
+# Group the  SARS data file
+region          sars block -100 100 -26 185 -65 65 units box                # Create a region for the datafile
+group           sars region sars                                            # group the input file with the name "sars"
+
+# Interatomic potentials
+pair_style      reax/c NULL                                                 # Pair potential style ReaxFF
+pair_coeff      * * ffield.reax.FC C N O S                                  # Assign Respective atoms
+
+# Settings
+compute         peratom all pe/atom                                         # Compute potential energy per atoms
+neighbor        2.0 bin                                                     # NEVER KNEW WHAT THIS IS !!!!!!!!!
+neigh_modify    delay 20 every 1 check yes page 500000 one 50000            # Helps with the lost atoms error!!!
+
+# Initialization
+velocity        all create 350 123456                                       # Setting temperature to 350 K
+variable        t_step equal "step"                                         # Assigning a variable for step
+variable        t_temp equal "temp"                                         # Assigning a variable for temperature
+thermo          100                                                         # Show [#] for every 100 steps
+thermo_style    custom step press temp pe                                   # Show [temp and step & PE ]
+
+# Relaxation
+#fix             rigid sars addforce 0.0 0.0 0.0                            # Make the sars group immobile by reducing force to 'zero' in all direction
+#fix             relax carbonatoms npt temp 250 250 0.5 iso 0 0 0.5 drag 1  # The start and end temperatures of abrasive is 250K and start and end pressure of abrasive is 0 and the abrasive is damped.
+fix             charge all qeq/reax 1 0.0 10.0 1.0e-6 reax/c                # Fix needed for reaxFF. DONNO WHAT THIS DOES !!!!!!
+variable        t equal 1                                                   # Assigning timestep
+timestep        ${t}                                                        # Equating timestep
+dump            1 all custom 200 equil.*.dump id type x y z fx fy fz        # Dump 'atom id' 'atom type' 'x,y,z coordinates' 'force along x,y,z coordinates'
+run             1                                                           # Run for 2000 time steps
+
+# always remove fixes that are no longer needed
+#unfix rigid
+#unfix relax
+#unfix charge
+
+#Scratching
+fix  2 carbonatoms move linear 5 0 0 units box                              # Apply force in x direction for wear @ 5 Angstroms/femtosecond
+dump 3 all custom 100 sars-Scratch.*.dump id type x y z fx fy fz            # Dump 'atom id' 'atom type' 'x,y,z coordinates' 'force along x,y,z coordinates'
+run 1000                                                                    # Run for 2000 time steps
+
+# End simulation
+print "All done"                                                            # HOPE TO SEE THIS AT THE END OF SCREEN

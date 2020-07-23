@@ -1,0 +1,17 @@
+tolerance 3.0
+filetype pdb
+output E_S.pdb
+
+structure E.pdb
+  number 1
+  inside box -44. 0. 0. 156. 50. 130.
+  center
+  fixed 0. 0. 0. 0. 0. 0.
+end structure
+
+structure 6vxx.pdb
+  number 1
+  inside box -44. 50. 0. 100. 200. 150.
+  center
+  fixed 0. 116. 0. 4.71238898 0. 0.
+end structure
