@@ -15,7 +15,7 @@ mol.spin = 0
 mol.verbose = 9
 mol.symmetry = True
 mol.symmetry_subgroup = 'C2v'
-name = 'H2O_STO-3G_CCSDpT'
+name = 'out'
 #mol.output = name+'.txt' # only worked up to end of SCF (CC output went to stdout)
 mol.build()
 
@@ -25,10 +25,6 @@ mol.build()
 
 mf = mol.RHF().set(chkfile = name + '.chk')
 mf.kernel()
-
-#pyscf.tools.fcidump.from_chkfile(name+'.fcidump',name+'.chk', tol=1e-18, float_format=' %.16g', molpro_orbsym=False, orbsym=None)
-#mf = pyscf.tools.fcidump.to_scf(name+'.fcidump', molpro_orbsym=False, mf=None)
-#mf.run()
 
 #####################
 ## post-Hartree-Fock:

@@ -26,8 +26,8 @@ mol.build()
 mf = mol.RHF().set(chkfile = name + '.chk')
 mf.kernel()
 
-pyscf.tools.fcidump.from_chkfile(name+'.fcidump',name+'.chk', tol=1e-18, float_format=' %.16g', molpro_orbsym=False, orbsym=None)
-mf = pyscf.tools.fcidump.to_scf(name+'.fcidump', molpro_orbsym=False, mf=None)
+pyscf.ao2mo.kernel(mol, mf.mo_coeff, name+'.fcidump.h5', dataname='hdf5_group_name')
+mf = pyscf.tools.fcidump.to_scf(name+'.fcidump.h5', molpro_orbsym=False, mf=None)
 mf.run()
 
 #####################
