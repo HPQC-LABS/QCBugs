@@ -1,0 +1,25 @@
+&SEWARD &END
+Title= HF molecule
+Symmetry
+X Y
+Basis set
+F.ANO-S-VDZ
+F      0.00000   0.00000   1.73300
+End of basis
+Basis set
+H.ANO-S-VDZ
+H      0.00000   0.00000   0.00000
+End of basis
+End of input
+&SCF
+&RASSCF
+Title= HF(+) cation
+OUTOrbitals= Canonical
+Symmetry= 1; Spin= 2
+nActEl= 1 0 0; Inactive= 2 1 1 0; Ras2= 1 0 0 0
+LumOrb; OUTOrbitals= Canonical
+&MOTRA; JobIph; Frozen= 1 0 0 0
+&CCSDT
+Iterations= 50; Shift= 0.2,0.2; Accuracy= 1.0d-7
+Denominators= 2; Extrapolation= 5,4
+Adaptation= 1; Triples= 3; T3Denominators= 0
