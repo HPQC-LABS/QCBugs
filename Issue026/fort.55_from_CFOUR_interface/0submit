@@ -1,0 +1,59 @@
+#!/bin/bash 
+#SBATCH -J Issue026
+#SBATCH --account=def-nike-ab
+#SBATCH -o ./out.%j
+#SBATCH -e ./err.%j
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=nik.dattani@gmail.com
+##SBATCH --time=671:39:59
+##SBATCH --time=167:39:59
+##SBATCH --time=71:39:59
+##SBATCH --time=23:39:59
+##SBATCH --time=11:39:59
+##SBATCH --time=2:39:59
+#SBATCH --time=1:00:59
+##SBATCH --cpus-per-task=20
+##SBATCH --cpus-per-task=16
+#SBATCH --cpus-per-task=1
+##SBATCH --mem=771000
+##SBATCH --mem=56000
+##SBATCH --mem=12000
+#SBATCH --mem=8000
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+
+export PATH=$PATH:/home/nike/mrcc.2020-02-22
+export PATH=/home/nike/mrcc.2020-02-22:$PATH
+#export PATH=$PATH:/home/nike/cfour_v2.00beta/cfour_v2.00beta/bin 
+export PATH=$PATH:/home/nike/cfour/cfour_v2.00beta/bin/
+#export PATH=$PATH:/home/nike/cfour_v2.00beta/cfour_april2019/bin
+
+#xclean
+#xcfour 
+dmrcc 
+
+
+
+
+
+
+##SBATCH -D ./
+## Queue (Partition):
+###SBATCH --partition=broadwell
+## Number of nodes and MPI tasks per node (62 gives segmentation fault):
+##SBATCH --nodes=1
+###SBATCH --ntasks-per-node=8
+## Number of CPUs per task:
+##SBATCH --cpus-per-task=8
+## Enable Hyperthreading:
+##SBATCH --ntasks-per-core=1
+#
+## Wall clock limit:
+###SBATCH --time=671:39:59
+###SBATCH --time=72:39:59
+
+#
+##/home/nike/MRCC_2018_with_new_ovirt_and_mrcc/dmrcc  > out.%j
+##xcfour > out.%j1
+#srun -o out.%j mrcc 
+#
+#####sbatch --dependency=afterany:3660574 0submit
