@@ -1,0 +1,8 @@
+# HE STO-3G
+iface=cfour
+calc=CC(2)
+mem=8GB
+rest=2
+                                                  
+tprint=0.01
+verbosity=3
