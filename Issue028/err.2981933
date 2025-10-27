@@ -1,0 +1,146 @@
+
+Lmod is automatically replacing "gcc/12.3" with "intel/2023.2.1".
+
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) flexiblas/3.3.1     2) openmpi/4.1.5
+
+shci: error: _parse_next_key: Parsing error at unrecognized key: SlurmctldParameters
+shci: error: Parse error in file /opt/software/slurm/24.11.6/etc/slurm.conf line 22: "SlurmctldParameters="conmgr_max_connections=100""
+shci: error: _parse_next_key: Parsing error at unrecognized key: SlurmctldSyslogDebug
+shci: error: Parse error in file /opt/software/slurm/24.11.6/etc/slurm.conf line 48: "SlurmctldSyslogDebug=info"
+shci: error: _parse_next_key: Parsing error at unrecognized key: X11Parameters
+shci: error: Parse error in file /opt/software/slurm/24.11.6/etc/slurm.conf line 87: "X11Parameters=home_xauthority"
+shci: error: _parse_next_key: Parsing error at unrecognized key: CliFilterPlugins
+shci: error: Parse error in file /opt/software/slurm/24.11.6/etc/slurm.conf line 94: "CliFilterPlugins=lua"
+shci: error: _parse_next_key: Parsing error at unrecognized key: InteractiveStepOptions
+shci: error: Parse error in file /opt/software/slurm/24.11.6/etc/slurm.conf line 96: "InteractiveStepOptions="--interactive --qos=interac --mem-per-cpu=0 --preserve-env --pty $SHELL""
+shci: error: _parse_next_key: Parsing error at unrecognized key: SlurmdParameters
+shci: error: Parse error in file /opt/software/slurm/24.11.6/etc/slurm.conf line 141: "SlurmdParameters=numa_node_as_socket"
+shci: error: NodeNames=c[1-700] CPUs=# or Procs=# with Boards=# is invalid and is ignored.
+shci: error: NodeNames=u[3-5] CPUs=# or Procs=# with Boards=# is invalid and is ignored.
+shci: error: NodeNames=u[1,2,6] CPUs=# or Procs=# with Boards=# is invalid and is ignored.
+shci: error: NodeNames=m[1-10] CPUs=# or Procs=# with Boards=# is invalid and is ignored.
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: slurm_send_kvs_comm_set: Protocol authentication error
+[m3.nibi.sharcnet:1283951] PMI_KVS_Commit [pmix_s1.c:535:s1_commit]: Operation failed
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: slurm_get_kvs_comm_set: Protocol authentication error
+[m3.nibi.sharcnet:1283951] PMI_Barrier [pmix_s1.c:556:fencenb]: Operation failed
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: cannot create auth context for (null)
+shci: error: authentication: authentication initialization failure
+shci: error: slurm_get_kvs_comm_set: Protocol authentication error
+[m3.nibi.sharcnet:1283951] PMI_Barrier [pmix_s1.c:556:fencenb]: Operation failed
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+[m3:1283951] *** Process received signal ***
+[m3:1283951] Signal: Aborted (6)
+[m3:1283951] Signal code:  (-6)
+[m3:1283951] [ 0] /cvmfs/soft.computecanada.ca/nix/store/63pk88rnmkzjblpxydvrmskkc8ci7cx6-glibc-2.24/lib/libpthread.so.0(+0x10e90)[0x14facfa10e90]
+[m3:1283951] [ 1] /cvmfs/soft.computecanada.ca/nix/store/63pk88rnmkzjblpxydvrmskkc8ci7cx6-glibc-2.24/lib/libc.so.6(gsignal+0x104)[0x14facdc33214]
+[m3:1283951] [ 2] /cvmfs/soft.computecanada.ca/nix/store/63pk88rnmkzjblpxydvrmskkc8ci7cx6-glibc-2.24/lib/libc.so.6(abort+0x16a)[0x14facdc3467a]
+[m3:1283951] [ 3] /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/lib/libstdc++.so.6(+0x96567)[0x14facec96567]
+[m3:1283951] [ 4] /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/lib/libstdc++.so.6(+0xa1e06)[0x14faceca1e06]
+[m3:1283951] [ 5] /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/lib/libstdc++.so.6(+0xa0f09)[0x14faceca0f09]
+[m3:1283951] [ 6] /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/lib/libstdc++.so.6(__gxx_personality_v0+0x264)[0x14faceca1834]
+[m3:1283951] [ 7] /cvmfs/soft.computecanada.ca/nix/store/63pk88rnmkzjblpxydvrmskkc8ci7cx6-glibc-2.24/lib/libgcc_s.so.1(+0xff63)[0x14face00ff63]
+[m3:1283951] [ 8] /cvmfs/soft.computecanada.ca/nix/store/63pk88rnmkzjblpxydvrmskkc8ci7cx6-glibc-2.24/lib/libgcc_s.so.1(_Unwind_RaiseException+0xfb)[0x14face0102eb]
+[m3:1283951] [ 9] /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/lib/libstdc++.so.6(__cxa_throw+0x37)[0x14faceca2077]
+[m3:1283951] [10] /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/lib/libstdc++.so.6(+0x96201)[0x14facec96201]
+[m3:1283951] [11] /home/nike/shci_2020_01_16/shci[0x43b0b2]
+[m3:1283951] [12] /home/nike/shci_2020_01_16/shci[0x4d8e70]
+[m3:1283951] [13] /home/nike/shci_2020_01_16/shci[0x44b74d]
+[m3:1283951] [14] /home/nike/shci_2020_01_16/shci[0x4308ef]
+[m3:1283951] [15] /cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/lib/libgomp.so.1(GOMP_parallel+0x42)[0x14face410f02]
+[m3:1283951] [16] /home/nike/shci_2020_01_16/shci[0x43c908]
+[m3:1283951] [17] /home/nike/shci_2020_01_16/shci[0x45d1fb]
+[m3:1283951] [18] /home/nike/shci_2020_01_16/shci[0x467d04]
+[m3:1283951] [19] /home/nike/shci_2020_01_16/shci[0x46917b]
+[m3:1283951] [20] /home/nike/shci_2020_01_16/shci[0x476c81]
+[m3:1283951] [21] /home/nike/shci_2020_01_16/shci[0x4333bd]
+[m3:1283951] [22] /home/nike/shci_2020_01_16/shci[0x4115c3]
+[m3:1283951] [23] /cvmfs/soft.computecanada.ca/nix/store/63pk88rnmkzjblpxydvrmskkc8ci7cx6-glibc-2.24/lib/libc.so.6(__libc_start_main+0xf0)[0x14facdc202e0]
+[m3:1283951] [24] /home/nike/shci_2020_01_16/shci[0x41184a]
+[m3:1283951] *** End of error message ***
+srun: error: m3: task 0: Aborted (core dumped)
+srun: Terminating StepId=2981933.0

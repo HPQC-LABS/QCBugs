@@ -1,0 +1,11 @@
+Job ID: 2742663
+Cluster: nibi
+User/Group: nike/nike
+State: FAILED (exit code 2)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 14-10:56:30
+CPU Efficiency: 96.18% of 15-00:42:40 core-walltime
+Job Wall-clock time: 22:32:40
+Memory Utilized: 2.23 TB
+Memory Efficiency: 77.54% of 2.88 TB (2.88 TB/node)

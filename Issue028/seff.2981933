@@ -1,0 +1,11 @@
+Job ID: 2981933
+Cluster: nibi
+User/Group: nike/nike
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 32
+CPU Utilized: 9-10:24:49
+CPU Efficiency: 97.73% of 9-15:39:44 core-walltime
+Job Wall-clock time: 07:14:22
+Memory Utilized: 2.03 TB
+Memory Efficiency: 34.91% of 5.81 TB (5.81 TB/node)
